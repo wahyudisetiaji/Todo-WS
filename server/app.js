@@ -8,7 +8,7 @@ require('dotenv').config();
 
 var mongoose = require('mongoose')
 var db = mongoose.connection
-mongoose.connect(`mongodb://wahyudi-db:sportident17@ds119702.mlab.com:19702/wahyudisetiaji`, { useNewUrlParser: true })
+mongoose.connect(`mongodb://${process.env.MLAB_USER}:${process.env.MLAB_PASS}@ds119702.mlab.com:19702/wahyudisetiaji`, { useNewUrlParser: true })
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('we are connected mlab!');
@@ -16,6 +16,9 @@ db.once('open', function() {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var taksRouter = require('./routes/taks');
+var qoutesRouter = require('./routes/qoutes');
+var isLogin = require('./middlewares/isLogin')
 
 var app = express();
 
@@ -32,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/taks', isLogin, taksRouter);
+app.use('/qoutes', qoutesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

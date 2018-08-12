@@ -3,7 +3,6 @@ var router = express.Router();
 const UserController = require('../controllers/user-controller') 
 
 /* GET users listing. */
-router.get('/', UserController.getUser);
 router.post('/signIn', UserController.signInUser);
 router.post('/signUp', UserController.signUpUser);
 router.post('/loginFacebook', UserController.logInFacebook);

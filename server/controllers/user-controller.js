@@ -49,29 +49,6 @@ class UserController {
       });
   }
 
-  //GET ALL USER ------------------------>>>
-  static getUser(req, res) {
-    User.find({})
-      .then(user => {
-        if (user.length === 0) {
-          res.status(404).json({
-            message: "users not found",
-            data: user
-          });
-        } else {
-          res.status(200).json({
-            message: "users found",
-            data: user
-          });
-        }
-      })
-      .catch(err => {
-        res.status(400).json({
-          message: err.message
-        });
-      });
-  }
-
   //SIGN IN USER ------------------------>>>
   static signInUser(req, res) {
     User.findOne({ email: req.body.email })
@@ -124,7 +101,7 @@ class UserController {
 
     axios
       .get(url_user_info)
-      .then(user => {
+      .then(user => {      
         User.findOne({ email: user.data.email })
         .then(userDB => {
           if (userDB === null) {
