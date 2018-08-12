@@ -9,7 +9,7 @@ To do list and Task manager - Organizer your life
 Route | HTTP | Description | Attributes
 ------|------|-------------|-----------
 /users/signIn | POST | Sign In a User | email, password
-/users/signUp | POST | Sign Up a User | name, email, /password
+/users/signUp | POST | Sign Up a User | name, email, password
 /users/loginFacebook | POST | Log In using Facebook | email
 
 
