@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var taksSchema = new Schema({
-    taksName: {
+var taskSchema = new Schema({
+    taskName: {
         type: String,
-        require: [true, 'name taks is required']
+        require: [true, 'name task is required']
     },
     dueDate: {
         type: Date,
         required: [true, 'due date is required']
+    },
+    priority: {
+        type: String,  
+    },
+    status: {
+        type: Boolean,
+        default: false
     },
     userId: {
         type: Schema.Types.ObjectId,
@@ -21,6 +28,6 @@ var taksSchema = new Schema({
     }
 })
 
-var Taks = mongoose.model('Taks', taksSchema)
+var Task = mongoose.model('Task', taskSchema)
 
-module.exports = Taks
+module.exports = Task

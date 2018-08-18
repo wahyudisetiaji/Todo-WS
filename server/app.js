@@ -16,7 +16,7 @@ db.once('open', function() {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var taksRouter = require('./routes/taks');
+var taskRouter = require('./routes/task');
 var qoutesRouter = require('./routes/qoutes');
 var isLogin = require('./middlewares/isLogin')
 
@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/taks', isLogin, taksRouter);
+app.use('/task', taskRouter);
 app.use('/qoutes', qoutesRouter);
 
 // catch 404 and forward to error handler

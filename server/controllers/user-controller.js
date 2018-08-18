@@ -44,7 +44,8 @@ class UserController {
       })
       .catch(err => {
         res.status(400).json({
-          message: err.message
+          message: "email is duplicate",
+          err
         });
       });
   }
@@ -130,6 +131,7 @@ class UserController {
               };
               res.status(200).json({
                 message: "user successfully registered",
+                token: data.token,
                 data
               });
             });

@@ -3,6 +3,8 @@ const axios = require('axios')
 class QoutesController {
 
     static qoutesOfTheDay(req, res) {
+        console.log('masuk con');
+        
 
         let url = 'https://talaikis.com/api/quotes/random/'
 

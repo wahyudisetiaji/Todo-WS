@@ -16,14 +16,17 @@
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <!-- Swal -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Custum CSS -->
     <link rel="stylesheet" href="./css/style.css">
-    <title>Sign In - Todo-WS</title>
+    <title>Sign Up - Todo-WS</title>
 </head>
 
 <body>
 
-    <div id="signin">
+    <div id="signup">
         <div class="container">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -32,27 +35,23 @@
                             <h1 class="title text-center">Todo <img class="logo" src="./img/logo-ws.png" alt="logo"></h1>
                             <h5 class="card-title text-center">Sign In</h5>
                             <form class="form-signin">
+                                <div class="form-label-group"  data-validate="Name is required">
+                                    <input type="text" id="inputName" class="form-control" placeholder="Name" name="name"v-model="name" required>
+                                    <label for="inputEmail">Name</label>
+                                </div>
                                 <div class="form-label-group">
-                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required>
-                                    <label for="inputEmail">Email address</label>
+                                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" v-model="email" required>
+                                    <label for="inputEmail">Email</label>
                                 </div>
 
                                 <div class="form-label-group">
                                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
                                     <label for="inputPassword">Password</label>
                                 </div>
-
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" @click="login">Sign
-                                    in
-                                </button>
+                                <p>Do you have account ? <a href="./index.html">Sign In</a></p>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" @click="signUp">Sign
+                                    in</button>
                                 <hr class="my-4">
-                                <p>Don't have account ? <a href="./signup.html">Sign Up</a></p>
-
-                                <p>Sign In with</p>
-                                <div style="text-align: center">
-                                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" style="text-align: center"></fb:login-button>
-                                </div>
-
                             </form>
                         </div>
                     </div>
@@ -72,11 +71,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <!-- Login FB -->
-    <script src="./js/login/loginFacebook.js"></script>
-
     <!-- Login Manual -->
-    <script src="./js/login/signin.js"></script>
+    <script src="./js/login/signup.js"></script>
 </body>
 
 </html>
