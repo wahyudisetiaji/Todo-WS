@@ -13,12 +13,14 @@ var signin = new Vue({
             })
             .then(dataUser=>{
                 localStorage.setItem('token',dataUser.data.data.token)
-                console.log(dataUser.data.data.token);
+                swal('sign in success')
+                setInterval(function(){
+                    window.location="http://localhost:8080/dashboard.html"
+                }, 2000)
                 
-                window.location="http://localhost:8080/dashboard.html"
             })
             .catch(err=>{
-                console.log(err)
+                swal(err.message)
             })
         }
     }

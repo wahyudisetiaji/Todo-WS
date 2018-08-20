@@ -13,12 +13,15 @@ var signup = new Vue({
                 email : this.email,
                 password : this.password
             })
-            .then(result=>{                
-                window.location ="http://localhost:8080/index.html"
-                localStorage.setItem('token',result.data.token)
+            .then(result=>{   
+                swal('sign up success')
+                setInterval(function(){
+                    window.location="http://localhost:8080/index.html"
+                }, 2000)             
+                window.location ="http://localhost:8080/index.html"  
             })
             .catch(err=>{
-               console.log(err);
+               swal(err.message)
             })
         }
     }

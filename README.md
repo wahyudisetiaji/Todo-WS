@@ -21,6 +21,9 @@ Route | HTTP | Description | Attributes
 /taks | POST | Create Task | taskName, dueDate
 /taks/:id | DELETE | Delete Task | Id Task
 /task/:id | PUT | Update Task | Id Task
+/task/task/:id | GET | Find one task | Id Task
+/task/priority/:token | GET | Find task priority | Token
+/task/done/:token | GET | FInd task done | Token
 
 **List of qoutes routes :**
 
@@ -28,3 +31,8 @@ Route | HTTP | Description | Attributes
 ------|------|-------------|-----------
 /qoutes | GET | Qoutes of the day | -
 
+
+**API USE**
+- Facebook Login
+- Nodemailer 
+- Qoutes 

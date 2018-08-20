@@ -1,5 +1,5 @@
-if (!localStorage.token) {
-  window.location = "http://localhost:8080/index.html";
+if(!localStorage.token){
+  window.location="http://localhost:8080/index.html"
 }
 
 var getTask = new Vue({
@@ -53,15 +53,19 @@ var getTask = new Vue({
     },
     myTask() {
       let token = localStorage.token;
-      this.data = [];
-      axios
-        .get(`http://localhost:3000/task/${token}`)
-        .then(tasks => {
-          this.data.push(tasks.data.tasks);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      axios({
+        method: 'GET',
+        url: `http://localhost:3000/task`,
+        headers : {
+          token
+        }
+      })
+      .then(tasks => {
+        this.data.push(tasks.data.tasks);
+      })
+      .catch(err => {
+        swal(err.message)
+      });
     },
     addTask() {
       let token = localStorage.token;
@@ -70,44 +74,62 @@ var getTask = new Vue({
         dueDate: this.date,
         priority: this.priority
       };
-      axios
-        .post(`http://localhost:3000/task/${token}`, task)
+      axios({
+        method: 'POST',
+        url: `http://localhost:3000/task`, 
+        headers: {
+          token
+        },
+        data: task
+      })
         .then(result => {
-          window.location = "http://localhost:8080/dashboard.html";
+          swal('task successfully created')
+          setInterval(function() {
+            window.location = "http://localhost:8080/dashboard.html"
+          }, 2000)
         })
         .catch(err => {
-          console.log(err);
+          swal(err.message)
         });
     },
     getTask(data) {
+      let token = localStorage.token;
       let id = data._id;
-      axios
-        .get(`http://localhost:3000/task/task/${id}`)
-        .then(task => {
-          (this.id = task.data.task._id),
-            (this.taskName = task.data.task.taskName),
-            (this.priority = task.data.task.priority);
-          this.status = task.data.task.status;
-          this.date = task.data.task.dueDate.slice(0, 10);
-        })
-        .catch(err => {});
+      axios({
+        method: 'GET',
+        url: `http://localhost:3000/task/task/${id}`,
+        headers: {
+          token
+        }
+      })
+      .then(task => {
+        this.id = task.data.task._id;
+          this.taskName = task.data.task.taskName;
+          this.priority = task.data.task.priority;
+        this.status = task.data.task.status;
+        this.date = task.data.task.dueDate.slice(0, 10);
+      })
+      .catch(err => {
+        swal(err.message)
+      });
     },
     updateTask() {
-      event.preventDefault();
       let data = {
         taskName: this.taskName,
         dueDate: this.date,
         priority: this.priority,
         status: this.status
       };
-      axios
-        .put(`http://localhost:3000/task/${this.id}`, data)
-        .then(task => {
-          window.location = "http://localhost:8080/dashboard.html";
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      axios.put(`http://localhost:3000/task/${this.id}`, data)
+      .then(task => {
+        swal('task successfully updated')
+        setInterval(function() {
+          window.location = "http://localhost:8080/dashboard.html"
+        }, 2000)
+      })
+      .catch(err => {
+        swal(err.message)
+      });
     },
     taskStatusDone(task) {
       console.log(task._id);
@@ -122,12 +144,23 @@ var getTask = new Vue({
         });
     },
     deleteTask(task) {
-      axios
-        .delete(`http://localhost:3000/task/${task._id}`)
-        .then(result => {
-          window.location = "http://localhost:8080/dashboard.html";
-        })
-        .catch(err => {});
+      let token = localStorage.token
+      axios({
+        method: 'DELETE',
+        url: `http://localhost:3000/task/${task._id}`,
+        headers: {
+          token
+        }
+      })
+      .then(result => {
+        swal('task successfully deleted')
+        setInterval(function() {
+          window.location = "http://localhost:8080/dashboard.html"
+        }, 2000)
+      })
+      .catch(err => {
+        swal(err.message)
+      });
     },
     taskPriority() {
       let token = localStorage.token;
