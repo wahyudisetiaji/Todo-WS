@@ -29,7 +29,6 @@ class TaskController {
 
   //DELETE Task ------------------------>>>
   static deleteTask(req, res) {
-    console.log(req.params.id);
     let id = req.params.id;
     Task.deleteOne({ _id: id })
       .then(() => {
@@ -73,8 +72,8 @@ class TaskController {
   //UPDATE Status Task ------------------------>>>
   static updateStatusTask(req, res) {
     let id = req.params.id;
-    console.log(id);
-
+    let token = req.headers.token;
+    let decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
     Task.updateOne(
       { _id: id },
       {
@@ -93,8 +92,8 @@ class TaskController {
         });
 
         const mailOptions = {
-          from: `ftodows666@gmail.com`,
-          to: `wahyudisetiaji@gmail.com`, 
+          from: `todows666@gmail.com`,
+          to: decode.email, 
           subject: "Todo WS", 
           html:
             'your todo is done'
@@ -146,11 +145,9 @@ class TaskController {
   //Find One Task ------------------------>>>
   static findOneTask(req, res) {
     let id = req.params.id;
-    console.log(id);
 
     Task.findOne({ _id: id })
       .then(task => {
-        console.log(task);
 
         res.status(200).json({
           message: "data all task",
@@ -170,7 +167,6 @@ class TaskController {
     let decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
     Task.find({ priority: "Priority", userId: decode.id })
       .then(tasks => {
-        console.log(tasks);
 
         res.status(200).json({
           message: "data all task priority",
@@ -190,7 +186,6 @@ class TaskController {
     let decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
     Task.find({ status: true, userId: decode.id })
       .then(tasks => {
-        console.log(tasks);
 
         res.status(200).json({
           message: "data all task priority",

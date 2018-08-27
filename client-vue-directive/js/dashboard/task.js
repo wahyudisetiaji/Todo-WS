@@ -132,15 +132,18 @@ var getTask = new Vue({
       });
     },
     taskStatusDone(task) {
-      console.log(task._id);
-
-      axios
-        .put(`http://localhost:3000/task/status/${task._id}`)
+      let token = localStorage.token;
+        axios({
+          method: 'PUT',
+          url: `http://localhost:3000/task/status/${task._id}`, 
+          headers: {
+            token
+          }
+        })
         .then(task => {
           window.location = "http://localhost:8080/dashboard.html";
         })
         .catch(err => {
-          console.log(err);
         });
     },
     deleteTask(task) {
@@ -171,7 +174,6 @@ var getTask = new Vue({
           this.data.push(tasks.data.tasks);
         })
         .catch(err => {
-          console.log(err);
         });
     },
     taskDone() {
@@ -183,7 +185,6 @@ var getTask = new Vue({
           this.data.push(tasks.data.tasks);
         })
         .catch(err => {
-          console.log(err);
         });
     },
     logout() {
@@ -201,5 +202,8 @@ var getTask = new Vue({
           swal(err.message)
         });
     }
+  },
+  mounted()  {
+    this.myTask()
   }
 });

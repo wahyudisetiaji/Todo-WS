@@ -35,11 +35,10 @@
                 if(response.status == 'connected'){
                 axios.post('http://localhost:3000/users/loginFacebook', response.authResponse)
                 .then((result) => {
-                    console.log(result);
                     
                     localStorage.setItem('token', result.data.token)   
                 }).catch((err) => {
-                    console.log(err);
+
                 });
                 }
                 
