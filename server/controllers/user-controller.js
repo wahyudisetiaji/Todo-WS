@@ -93,7 +93,6 @@ class UserController {
       });
   }
 
-  //LOG IN FACEBOOK ------------------------>>>
   static logInFacebook(req, res) {
     let authResponse = req.body;
     let url_user_info = `https://graph.facebook.com/me?fields=id,name,email&access_token=${
